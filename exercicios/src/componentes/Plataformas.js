@@ -9,6 +9,9 @@ export default pops => {
     } else {
       Alert.alert("Informação", msg)
     }
+	
+	console.log('Test debug console.');
+	
   }
 
   return <Button title="Plataforma" onPress={() => notificar('Parabéns!')}></Button>
