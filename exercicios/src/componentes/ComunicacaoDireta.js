@@ -3,10 +3,15 @@ import { View, Text } from 'react-native'
 
 const fonte = { style: { fontSize: 30 } }
 
+function filhosComProps(props) {
+  return React.Children.map(props.children,
+    c => React.cloneElement(c, { ...props, ...c.props }))
+}
+
 export const Filho = props => {
   return (
     <View>
-      <Text {...fonte}>Filho: {props.nome}</Text>
+      <Text {...fonte}>Filho: {props.nome} {props.sobrenome}</Text>
     </View>
   )
 }
@@ -15,7 +20,9 @@ export const Pai = props => {
   return (
     <View>
       <Text {...fonte}>Pai: {props.nome} {props.sobrenome}</Text>
-      {props.children}
+      {/* {React.cloneElement(props.children, { ...props, ...props.children.props})}  copia só um elemento filho*/}
+      {filhosComProps(props)}
+      {/* {props.children} */}
     </View>
   )
 }
@@ -36,3 +43,5 @@ export const Avo = props => {
     </View >
   )
 }
+
+export default Avo
