@@ -15,10 +15,6 @@ export default class App extends Component {
 
   state = { ...initialState }
 
-  state = {
-    displayValue: "0"
-  };
-
   addDigit = n => {
 
     const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay
@@ -35,7 +31,7 @@ export default class App extends Component {
       const newValue = parseFloat(displayValue)
       const values = [...this.state.values]
       values[this.state.current] = newValue
-      this.state({ values })
+      this.setState({ values })
     }
 
   };
