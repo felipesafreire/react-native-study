@@ -8,7 +8,9 @@ import {
     StyleSheet,
     TouchableWithoutFeedback,
     TouchableOpacity,
-    Alert
+    Alert,
+    DatePickerAndroid,
+    Platform
 } from 'react-native'
 import moment from 'moment'
 import commonStyles from '../commonStyles';
@@ -29,7 +31,37 @@ export default class AddTask extends Component {
         this.setState({ ...initialState })
     }
 
+    handleDateAndroidChanged = () => {
+        DatePickerAndroid.open({
+            date: this.state.date
+        }).then(e => {
+            if (e.action !== DatePickerAndroid.dismissedAction) {
+                const momemtDate = moment(this.state.date)
+                momemtDate.date(e.day)
+                momemtDate.month(e.month)
+                momemtDate.year(e.year)
+                this.setState({ date: momemtDate.toDate() })
+            }
+        })
+    }
+
     render() {
+
+        let datePicker = null;
+        if (Platform.OS === 'ios') {
+            datePicker = <DatePickerIOS mode='date'
+                date={this.state.date}
+                onDateChange={date => this.setState({ date })}></DatePickerIOS>
+        } else {
+            datePicker = (
+                <TouchableOpacity onPress={this.handleDateAndroidChanged}>
+                    <Text style={styles.date}>
+                        {moment(this.state.date).format('ddd, D [de] MMM [de] YYYY')}
+                    </Text>
+                </TouchableOpacity>
+            )
+        }
+
         return (
             <Modal onRequestClose={this.props.onCancel}
                 visible={this.props.isVisible}
@@ -44,9 +76,7 @@ export default class AddTask extends Component {
                         style={styles.input}
                         value={this.state.desc}
                         onChangeText={desc => this.setState({ desc })}></TextInput>
-                    <DatePickerIOS mode='date'
-                        date={this.state.date}
-                        onDateChange={date => this.setState({ date })}></DatePickerIOS>
+                    {datePicker}
                     <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }} >
                         <TouchableOpacity onPress={this.props.onCancel}>
                             <Text style={styles.button}>Cancelar</Text>
@@ -97,5 +127,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#e3e3e3',
         borderRadius: 6
+    },
+    date: {
+        fontFamily: commonStyles.fontFamily,
+        fontSize: 20,
+        marginLeft: 10,
+        marginTop: 10,
+        textAlign: 'center'
     }
 })
