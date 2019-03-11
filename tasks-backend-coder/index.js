@@ -13,5 +13,6 @@ consign()
 app.db = db
 
 app.listen(3000, () => {
-    console.log('Backend executando...')
+    console.log('Backend executando... na porta 3000')
+    console.log('http://127.0.0.1:3000')
 })
