@@ -5,12 +5,18 @@ import {
     Dimensions,
     Image
 } from 'react-native'
+import Autor from './Autor';
+import Comments from './Comments';
+import AddComment from './AddComment';
 
 export default class Post extends Component {
     render() {
         return (
             <View style={styles.container}>
                 <Image source={this.props.image} style={styles.image}></Image>
+                <Autor email='lipe_safreire@hotmail.com' nickname="Felipe Sá Freire"></Autor>
+                <Comments comments={this.props.comments}></Comments>
+                <AddComment></AddComment>
             </View>
         )
     }
