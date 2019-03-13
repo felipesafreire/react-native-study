@@ -1,12 +1,12 @@
-import { Alert, Platform } from 'react-native'
+import { Alert, Platform } from "react-native";
 
-// const server = Platform.OS === 'ios' ?
-//     'http://localhost:3000' : 'http://10.0.2.2:3000';
+const server =
+  Platform.OS === "ios" ? "http://localhost:3000" : "http://10.0.2.2:3000";
 
-const server = 'http://172.18.246.223:3000';
+// const server = 'http://172.18.246.223:3000';
 
 function showError(err) {
-    Alert.alert("Ops! Ocorreu um problema!", `Mensagem: ${err}`);
+  Alert.alert("Ops! Ocorreu um problema!", `Mensagem: ${err}`);
 }
 
-export { server, showError }
+export { server, showError };
