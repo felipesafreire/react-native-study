@@ -14,7 +14,7 @@ export default class Post extends Component {
         return (
             <View style={styles.container}>
                 <Image source={this.props.image} style={styles.image}></Image>
-                <Autor email='lipe_safreire@hotmail.com' nickname="Felipe Sá Freire"></Autor>
+                <Autor email={this.props.email} nickname={this.props.nickname}></Autor>
                 <Comments comments={this.props.comments}></Comments>
                 <AddComment></AddComment>
             </View>

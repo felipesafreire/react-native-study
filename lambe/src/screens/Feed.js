@@ -17,6 +17,7 @@ export default class Feed extends Component {
                 { nickname: 'Josh Ray Scheldon', comment: 'Lega!!!!' },
                 { nickname: 'Ana Julia', comment: 'Legal hein fera!' },
             ],
+        }, {
             id: Math.random(),
             nickname: 'Francisco Oliveira Filho',
             email: 'francisco@gmail.com',
@@ -40,5 +41,10 @@ export default class Feed extends Component {
 }
 
 const styles = StyleSheet.create({
-
+    container:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "#F5FCFF"
+    }
 })
