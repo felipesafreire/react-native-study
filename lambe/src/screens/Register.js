@@ -7,26 +7,28 @@ import {
     TextInput
 } from 'react-native'
 
-export default class Login extends Component {
+export default class Register extends Component {
 
     state = {
+        name: '',
         email: '',
         password: ''
-    }
-
-    login = () => {
-        this.props.navigation.navigate('Profile')
     }
 
     render() {
         return (
             <View style={styles.container}>
+                <TextInput placeholder="Nome"
+                    style={styles.input}
+                    onChangeText={name => this.setState({ name })}
+                    autoFocus={true}
+                    value={this.state.name}>
+                </TextInput>
                 <TextInput placeholder="Email"
                     style={styles.input}
                     onChangeText={email => this.setState({ email })}
-                    autoFocus={true}
-                    value={this.state.email}
-                    keyboardType='email-address'>
+                    keyboardType={'email-address'}
+                    value={this.state.email}>
                 </TextInput>
                 <TextInput placeholder="Senha"
                     style={styles.input}
@@ -34,17 +36,14 @@ export default class Login extends Component {
                     onChangeText={password => this.setState({ password })}
                     value={this.state.password}>
                 </TextInput>
-                <TouchableOpacity onPress={this.login}
+                <TouchableOpacity onPress={() => { }}
                     style={styles.button}>
-                    <Text style={styles.buttonText}>Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Register')}
-                    style={styles.button}>
-                    <Text style={styles.buttonText}>Criar nova conta</Text>
+                    <Text style={styles.buttonText}>Salvar</Text>
                 </TouchableOpacity>
             </View>
         )
     }
+
 
 }
 
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#EEE',
         height: 40,
         borderWidth: 1,
-        borderColor: '#333'
+        borderColor: '#333',
+        paddingLeft: 15
     }
 })
