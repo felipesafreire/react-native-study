@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { login } from '../store/actions/user'
 import {
     View,
     Text,
@@ -7,14 +9,16 @@ import {
     TextInput
 } from 'react-native'
 
-export default class Login extends Component {
+class Login extends Component {
 
     state = {
+        name: 'Temporario',
         email: '',
         password: ''
     }
 
     login = () => {
+        this.props.onLogin({ ...this.state })
         this.props.navigation.navigate('Profile')
     }
 
@@ -72,3 +76,11 @@ const styles = StyleSheet.create({
         borderColor: '#333'
     }
 })
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogin: user => dispatch(login(user))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login);
