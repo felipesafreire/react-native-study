@@ -5,6 +5,9 @@ import { name as appName } from './app.json';
 import Navigator from './src/Navigator';
 import storeConfig from './src/store/storeConfig.js';
 
+import axios from 'axios'
+axios.defaults.baseURL = 'https://lambe-df1e8.firebaseio.com/'
+
 const store = storeConfig()
 const Redux = () => {
     return (

@@ -1,25 +1,7 @@
 import { ADD_POST, ADD_COMMENT } from "../actions/actionTypes";
 
 const initialState = {
-  posts: [
-    {
-      id: Math.random(),
-      nickname: "Rafael Pereira Filho",
-      email: "rafaeldsda@gmail.com",
-      image: require("../../../assets/imgs/fence.jpg"),
-      comments: [
-        { nickname: "Josh Ray Scheldon", comment: "Lega!!!!" },
-        { nickname: "Ana Julia", comment: "Legal hein fera!" }
-      ]
-    },
-    {
-      id: Math.random(),
-      nickname: "Francisco Oliveira Filho",
-      email: "francisco@gmail.com",
-      image: require("../../../assets/imgs/bw.jpg"),
-      comments: []
-    }
-  ]
+  posts: []
 };
 
 const reducer = (state = initialState, action) => {
