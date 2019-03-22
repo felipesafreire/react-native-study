@@ -29,14 +29,14 @@ export const addComment = payload => {
 
 export const setPosts = posts => {
     return {
-        type: ADD_COMMENT,
+        type: SET_POSTS,
         payload: posts
     }
 }
 
 export const fetchPosts = () => {
     return dispatch => {
-        axios.get('/post.json')
+        axios.get('/posts.json')
             .catch(err => console.log(err))
             .then(res => {
                 const rawPosts = res.data;

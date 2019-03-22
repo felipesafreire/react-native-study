@@ -1,4 +1,4 @@
-import { ADD_POST, ADD_COMMENT } from "../actions/actionTypes";
+import { SET_POSTS, ADD_COMMENT } from "../actions/actionTypes";
 
 const initialState = {
   posts: []
@@ -6,12 +6,10 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
+    case SET_POSTS:
       return {
         ...state,
-        posts: state.posts.concat({
-          ...action.payload
-        })
+        posts: action.payload
       };
     case ADD_COMMENT:
       return {
