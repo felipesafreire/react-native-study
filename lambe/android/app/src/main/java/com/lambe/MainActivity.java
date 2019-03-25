@@ -1,4 +1,4 @@
-package com.lambe;
+package br.com.lambestudy;
 
 import com.facebook.react.ReactActivity;
 

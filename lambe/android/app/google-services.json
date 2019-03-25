@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "936946904334",
+    "firebase_url": "https://lambe-df1e8.firebaseio.com",
+    "project_id": "lambe-df1e8",
+    "storage_bucket": "lambe-df1e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936946904334:android:22d0f3e8e42da0fe",
+        "android_client_info": {
+          "package_name": "br.com.lambestudy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936946904334-hjhg23e84mnlnopheb3j8jdvdcg5fp5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDlhGOdVxXEeDYMQiCSCNLvEk_2E3lU_8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936946904334:android:68da9148fe44e960",
+        "android_client_info": {
+          "package_name": "lambe.com.br"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936946904334-hjhg23e84mnlnopheb3j8jdvdcg5fp5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDlhGOdVxXEeDYMQiCSCNLvEk_2E3lU_8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
