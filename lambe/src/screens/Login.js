@@ -12,7 +12,7 @@ import {
 class Login extends Component {
 
     state = {
-        name: 'Temporario',
+        name: '',
         email: '',
         password: ''
     }

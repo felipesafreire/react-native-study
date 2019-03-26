@@ -62,7 +62,7 @@ export const login = user => {
                         .then(res => {
                             user.password = null
                             user.name = res.data.name
-                            dispatch(userLoaded(user))
+                            dispatch(userLogged(user))
                             dispatch(userLoaded())
                         })
                 }
