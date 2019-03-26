@@ -1,10 +1,9 @@
 /**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
+Metro configuration for React Native
+https://github.com/facebook/react-native
+@Format
+*/
 module.exports = {
   transformer: {
     getTransformOptions: async () => ({

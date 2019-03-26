@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native'
 import { connect } from 'react-redux'
 import { createUser } from '../store/actions/user';
@@ -15,6 +16,18 @@ class Register extends Component {
         name: '',
         email: '',
         password: ''
+    }
+
+    createUser = () => {
+        if (this.state.name === '' || this.state.email === '' || this.state.password === '') {
+            Alert.alert("Erro", "Todos os campos são obrigatórios.")
+            return;
+        }
+        if (this.state.password.length < 6) {
+            Alert.alert("Erro", "Senha deve conter no mínimo 6 caracteres");
+            return;
+        }
+        this.props.onCreateUser(this.state);
     }
 
     render() {
@@ -39,7 +52,7 @@ class Register extends Component {
                     value={this.state.password}>
                 </TextInput>
                 <TouchableOpacity
-                    onPress={() => this.props.onCreateUser(this.state)}
+                    onPress={this.createUser}
                     style={styles.button}>
                     <Text style={styles.buttonText}>Salvar</Text>
                 </TouchableOpacity>

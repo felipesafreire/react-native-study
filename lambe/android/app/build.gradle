@@ -1,5 +1,4 @@
 apply plugin: "com.android.application"
-apply plugin: 'com.google.gms.google-services'
 
 import com.android.build.OutputFile
 
@@ -139,21 +138,26 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-firebase')
     implementation project(':react-native-gesture-handler')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-image-picker')
 
-    implementation project(':react-native-firebase')
+     implementation project(path: ':react-native-firebase', configuration: 'default')
     
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    implementation "com.google.android.gms:play-services-base:16.0.1"
+    // Firebase dependencies
     implementation "com.google.firebase:firebase-core:16.0.6"
+    implementation "com.google.android.gms:play-services-base:16.0.1"
+
+    // Authentication
+    implementation "com.google.firebase:firebase-auth:16.1.0"
 
 }
+
+
 
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use
@@ -161,3 +165,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+apply plugin: 'com.google.gms.google-services'
