@@ -6,7 +6,7 @@ export default class Splash extends Component {
     componentDidMount = () => {
         setTimeout(
             () => { this.props.navigation.navigate('App') },
-            2000
+            3000
         )
     }
 
@@ -17,6 +17,9 @@ export default class Splash extends Component {
                     style={styles.image} />
                 <Text style={styles.header}>
                     Lambe-Lambe
+                </Text>
+                <Text style={styles.text}>
+                    Desenvolvido por Felipe Sá Freire
                 </Text>
             </View>
         )
@@ -36,8 +39,13 @@ const styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     header: {
-        fontSize: 50,
+        fontSize: 30,
         padding: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    text: {
+        fontSize: 12,
+        textAlign: 'center'
     }
 })

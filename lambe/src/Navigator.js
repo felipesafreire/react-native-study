@@ -60,11 +60,11 @@ const MenuConfig = {
     }
 }
 
-const MenuNavigator = createAppContainer(createBottomTabNavigator(MenuRoutes, MenuConfig));
+const MenuNavigator = createBottomTabNavigator(MenuRoutes, MenuConfig);
 
-const SplashRouter = createSwitchNavigator({
+const SplashRouter = createAppContainer(createSwitchNavigator({
     Splash: Splash,
     App: MenuNavigator
-}, { initialRouteName: 'Splash' })
+}, { initialRouteName: 'Splash' }))
 
 export default SplashRouter;

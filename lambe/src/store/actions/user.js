@@ -62,12 +62,10 @@ export const login = user => {
             .then(result => {
                 let dataUser = result;
                 firebase.auth()
-                    .currentUser.getIdToken(true)
+                    .currentUser.getIdToken()
                     .catch(() => dispatch(setMessage({ title: 'Erro', text: "Erro ao obter informações do usuário." })))
                     .then(res => {
-                        //TODO: VERIFICAR LOGIN
-                        console.log(res);
-                        user.token = res.IdToken
+                        user.token = res
                         axios.get(`/users/${dataUser.user.uid}.json`)
                             .catch(() => dispatch(setMessage({ title: 'Erro', text: "Erro ao obter informações do usuário." })))
                             .then(res => {
