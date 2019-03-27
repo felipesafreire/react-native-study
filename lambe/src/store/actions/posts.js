@@ -1,13 +1,13 @@
 import {
     SET_POSTS,
-    ADD_COMMENT,
     CREATING_POST,
     POST_CREATED
 } from "./actionTypes";
+import { setMessage } from './message'
 import axios from 'axios'
 
 export const addPost = post => {
-    return dispatch => {
+    return (dispatch, getState) => {
         dispatch(creatingPost())
         axios({
             url: 'uploadImage',
@@ -16,35 +16,34 @@ export const addPost = post => {
             data: {
                 image: post.image.base64
             }
-        }).then(err => {
-            post.image = err.data.imageUrl
-            axios.post('/posts.json', { ...post })
-                .catch(err => console.error(err))
-                .then(() => {
-                    dispatch(fetchPosts())
-                    dispatch(postCreated())
-                })
+        })
+            .catch(() => dispatch(setMessage({ title: 'Erro', text: "Ocorreu um erro inesperado!" })))
+            .then(res => {
+                post.image = res.data.imageUrl
+                axios.post(`/posts.json?auth=${getState().user.token}`, { ...post })
+                    .catch(() => dispatch(setMessage({ title: 'Erro', text: "Ocorreu um erro inesperado!" })))
+                    .then(() => {
+                        dispatch(fetchPosts())
+                        dispatch(postCreated())
+                    })
 
-        }).catch(err => console.log(err))
+
+            })
     }
 }
 
 export const addComment = payload => {
-    return dispatch => {
+    return (dispatch, getState) => {
         axios.get(`/posts/${payload.postId}.json`)
-            .catch(err => console.log(err))
+            .catch(() => dispatch(setMessage({ title: 'Erro', text: "Ocorreu um erro inesperado!" })))
             .then(res => {
                 const comments = res.data.comments || []
                 comments.push(payload.comment)
-                axios.patch(`/posts/${payload.postId}.json`, { comments })
-                    .catch(err => console.log(err))
+                axios.patch(`/posts/${payload.postId}.json?auth=${getState().user.token}`, { comments })
+                    .catch(() => dispatch(setMessage({ title: 'Erro', text: "Ocorreu um erro inesperado!" })))
                     .then(res => dispatch(fetchPosts()))
             })
     }
-    // return {
-    //     type: ADD_COMMENT,
-    //     payload
-    // }
 }
 
 export const setPosts = posts => {
@@ -57,7 +56,7 @@ export const setPosts = posts => {
 export const fetchPosts = () => {
     return dispatch => {
         axios.get('/posts.json')
-            .catch(err => console.log(err))
+            .catch(() => dispatch(setMessage({ title: 'Erro', text: "Ocorreu um erro inesperado!" })))
             .then(res => {
                 const rawPosts = res.data;
                 const posts = [];

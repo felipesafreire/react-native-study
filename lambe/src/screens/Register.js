@@ -18,6 +18,13 @@ class Register extends Component {
         password: ''
     }
 
+    componentDidUpdate = prevProps => {
+        if (prevProps.isLoading && !this.props.isLoading) {
+            this.setState({ name: '', email: '', password: '' })
+            this.props.navigation.navigate('Feed')
+        }
+    }
+
     createUser = () => {
         if (this.state.name === '' || this.state.email === '' || this.state.password === '') {
             Alert.alert("Erro", "Todos os campos são obrigatórios.")
@@ -89,10 +96,16 @@ const styles = StyleSheet.create({
     }
 })
 
+const mapStateToProps = ({ user }) => {
+    return {
+        isLoading: user.isLoading
+    }
+}
+
 const mapDispatchToprops = dispatch => {
     return {
         onCreateUser: user => dispatch(createUser(user))
     }
 }
 
-export default connect(null, mapDispatchToprops)(Register)
+export default connect(mapStateToProps, mapDispatchToprops)(Register)

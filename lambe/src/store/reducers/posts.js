@@ -34,12 +34,12 @@ const reducer = (state = initialState, action) => {
     case CREATING_POST:
       return {
         ...state,
-        isUploading: false
+        isUploading: true
       }
     case POST_CREATED:
       return {
         ...state,
-        isUploading: true
+        isUploading: false
       }
     default:
       return state;

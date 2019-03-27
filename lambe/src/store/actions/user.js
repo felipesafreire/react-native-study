@@ -5,6 +5,7 @@ import {
     USER_LOADED
 } from "./actionTypes";
 import axios from 'axios'
+import { setMessage } from './message'
 import firebase from 'react-native-firebase'
 
 export const userLogged = user => {
@@ -22,16 +23,19 @@ export const logout = () => {
 
 export const createUser = user => {
     return dispatch => {
+        dispatch(loadingUser())
         firebase.auth()
             .createUserWithEmailAndPassword(user.email, user.password)
-            .catch(err => console.log(err))
+            .catch(() => dispatch(setMessage({ title: 'Erro', text: "Erro ao criar o usuario." })))
             .then(res => {
                 if (res.user.uid) {
                     axios.put(`/users/${res.user.uid}.json`, {
                         name: user.name
                     })
-                        .catch(err => console.log(errr))
-                        .then(res => console.log('Usuário criado com sucesso'))
+                        .catch(() => dispatch(setMessage({ title: 'Erro', text: "Erro ao criar o usuario." })))
+                        .then(() => {
+                            dispatch(login(user))
+                        })
                 }
             })
     }
@@ -54,18 +58,24 @@ export const login = user => {
         dispatch(loadingUser())
         firebase.auth()
             .signInWithEmailAndPassword(user.email, user.password)
-            .catch(err => console.log(err))
-            .then(res => {
-                if (res.user.uid) {
-                    axios.get(`/users/${res.user.uid}.json`)
-                        .catch(err => console.log(err))
-                        .then(res => {
-                            user.password = null
-                            user.name = res.data.name
-                            dispatch(userLogged(user))
-                            dispatch(userLoaded())
-                        })
-                }
+            .catch(() => dispatch(setMessage({ title: 'Erro', text: "E-mail ou senha invalida." })))
+            .then(result => {
+                let dataUser = result;
+                firebase.auth()
+                    .currentUser.getIdToken(true)
+                    .catch(() => dispatch(setMessage({ title: 'Erro', text: "Erro ao obter informações do usuário." })))
+                    .then(res => {
+                        //TODO: VERIFICAR LOGIN
+                        user.token = res.IdToken
+                        axios.get(`/users/${dataUser.user.uid}.json`)
+                            .catch(() => dispatch(setMessage({ title: 'Erro', text: "Erro ao obter informações do usuário." })))
+                            .then(res => {
+                                delete user.password
+                                user.name = res.data.name
+                                dispatch(userLogged(user))
+                                dispatch(userLoaded())
+                            })
+                    })
             })
     }
 }

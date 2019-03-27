@@ -23,7 +23,7 @@ class Login extends Component {
 
     componentDidUpdate = prevProps => {
         if (prevProps.isLoading && !this.props.isLoading) {
-            this.props.navigation.navigate('Profile')
+            this.props.navigation.navigate('Feed')
         }
     }
 

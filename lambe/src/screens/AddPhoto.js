@@ -41,7 +41,7 @@ class AddPhoto extends Component {
       {
         title: "Escolha a imagem",
         takePhotoButtonTitle: "Tirar foto",
-        //chooseFromLibraryButtonTitle: "Selecionar da galeria",
+        chooseFromLibraryButtonTitle: "Selecionar da galeria",
         cancelButtonTitle: "Cancelar",
         maxHeight: 600,
         maxWidth: 800
@@ -52,6 +52,15 @@ class AddPhoto extends Component {
             image: { uri: res.uri, base64: res.data }
           });
         }
+
+        if (res.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (res.error) {
+          console.log('ImagePicker Error: ', res.error);
+        } else if (res.customButton) {
+          console.log('User tapped custom button: ', res.customButton);
+        } 
+
       }
     );
   };
@@ -63,8 +72,13 @@ class AddPhoto extends Component {
       return;
     }
 
-    if (!this.props.image) {
-      Alert.alert("Falha!", "Tire uma foto ou selecione uma imagem a partir da galeria.")
+    if (!this.state.image) {
+      Alert.alert("Erro!", "Tire uma foto ou selecione uma imagem a partir da galeria.")
+      return;
+    }
+
+    if (!this.state.comment) {
+      Alert.alert("Erro", "Comentário obrigatório.");
       return;
     }
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList, View, Text } from "react-native";
 import Header from "../components/Header";
 import Post from "../components/Post";
 import { fetchPosts } from "../store/actions/posts";

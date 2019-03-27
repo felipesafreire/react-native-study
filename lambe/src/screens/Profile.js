@@ -50,7 +50,10 @@ const styles = StyleSheet.create({
     },
     nickname: {
         marginTop: 30,
+        paddingLeft: 20,
+        paddingRight: 20,
         fontSize: 30,
+        textAlign: 'center',
         fontWeight: 'bold'
     },
     email: {
